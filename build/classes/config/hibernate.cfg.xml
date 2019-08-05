@@ -22,5 +22,9 @@
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		
+		<!-- Classes mapping -->
+		<mapping class="fr.gestionprojets.dao.entity.Projet"/>
+		<mapping class="fr.gestionprojets.dao.entity.Type"/>
+		
 	</session-factory>
 </hibernate-configuration>
