@@ -1,5 +1,6 @@
 package fr.gestionprojets.utils;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import fr.gestionprojets.dao.ProjetDAO;
@@ -9,6 +10,8 @@ import fr.gestionprojets.dao.entity.Projet;
 public class Test {
 
 	static private Session session = HibernateUtil.openSession();
+	
+	static private Logger log = Logger.getLogger(Test.class);
 	
 	public static void main(String[] args) {
 		
@@ -21,6 +24,8 @@ public class Test {
 		
 		p.setTitle("titre de projet");
 		dao.add(p);
+		
+		log.info("ooooo");
 		
 	}
 	
