@@ -6,6 +6,12 @@
 <title>Gestion de projet</title>
 </h:head>
 <h:body>
-	<h:outputText value="Connexion JSF OK" />
+	
+	<h:form>
+		<h:outputText value="Titre du projet" />
+		<h:inputText value="#{mbProjet.title}"></h:inputText>
+		<h:commandButton value="submit" actionListener="#{mbProjet.saveData}"></h:commandButton>
+	</h:form>
+	
 </h:body>
 </html>
