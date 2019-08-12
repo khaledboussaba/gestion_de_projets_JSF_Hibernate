@@ -18,7 +18,7 @@ public class ProjectManagedBean {
 	public Logger logger = Logger.getLogger(ProjectManagedBean.class);
 	private String title;
 	private String description;
-	private Double budget;
+	private String budget;
 	private String type;
 	private String active;
 	
@@ -27,6 +27,7 @@ public class ProjectManagedBean {
 	@PostConstruct
 	public void init() {
 		typeList = new ArrayList<SelectItem>();
+		typeList.add(new SelectItem("", ""));
 		typeList.add(new SelectItem(1, "Informatique"));
 		typeList.add(new SelectItem(2, "Commerce"));
 		typeList.add(new SelectItem(3, "Autre"));
@@ -59,10 +60,10 @@ public class ProjectManagedBean {
 		this.description = description;
 	}
 	
-	public Double getBudget() {
+	public String getBudget() {
 		return budget;
 	}
-	public void setBudget(Double budget) {
+	public void setBudget(String budget) {
 		this.budget = budget;
 	}
 	
