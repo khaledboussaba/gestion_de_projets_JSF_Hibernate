@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Ajouter un nouveau projet || Gestion de projet</title>
+</h:head>
+<h:body>
+	
+	<h:form>
+	
+		<h3>Ajouter un nouveau projet</h3>
+		
+		<table>
+			<tr>
+				<td><h:outputLabel value="Titre : " for="titre" /></td>
+				<td><h:inputText value="#{mbProject.title}" id="titre"/></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel value="Description : " for="desc"/></td>
+				<td><h:inputTextarea rows="8" cols="50" value="#{mbProject.description}" id="desc"></h:inputTextarea></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel value="Budget : " for="budget"/></td>
+				<td><h:inputText value="#{mbProject.budget}" id="budget"/></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel value="Type : " for="type"/></td>
+				<td>
+					<h:selectOneMenu id="type" value="#{mbProject.type}">
+						<f:selectItems value="#{mbProject.typeList}"></f:selectItems>
+					</h:selectOneMenu>
+				</td>
+			</tr>
+			<tr>
+				<td><h:outputLabel value="Active : " for="active"/></td>
+				<td>
+					<h:selectOneRadio value="#{mbProject.active}" id="active">
+						<f:selectItem itemValue="Y" itemLabel="Oui"></f:selectItem>
+						<f:selectItem itemValue="N" itemLabel="Non"></f:selectItem>
+					</h:selectOneRadio>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<h:commandButton value="Save" actionListener="#{mbProject.addProject}"></h:commandButton>
+				</td>
+			</tr>
+		</table>
+		
+	</h:form>
+	
+</h:body>
+</html>

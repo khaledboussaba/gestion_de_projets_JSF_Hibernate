@@ -20,10 +20,10 @@
 		
 		<!-- optionnal propretires -->
 		<property name="hibernate.show_sql">true</property>
-		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
 		
 		<!-- Classes mapping -->
-		<mapping class="fr.gestionprojets.dao.entity.Projet"/>
+		<mapping class="fr.gestionprojets.dao.entity.Project"/>
 		<mapping class="fr.gestionprojets.dao.entity.Type"/>
 		
 	</session-factory>

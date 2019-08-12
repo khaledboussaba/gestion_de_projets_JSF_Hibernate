@@ -3,9 +3,9 @@ package fr.gestionprojets.utils;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import fr.gestionprojets.dao.ProjetDAO;
-import fr.gestionprojets.dao.ProjetDAOImpl;
-import fr.gestionprojets.dao.entity.Projet;
+import fr.gestionprojets.dao.ProjectDAO;
+import fr.gestionprojets.dao.ProjectDAOImpl;
+import fr.gestionprojets.dao.entity.Project;
 
 public class Test {
 
@@ -19,13 +19,13 @@ public class Test {
 //		
 //		session.createQuery("SELECT t FROM Type t").list();
 		
-		ProjetDAO dao = new ProjetDAOImpl();
-		Projet p = new Projet();
-		
-		p.setTitle("titre de projet");
-		dao.add(p);
-		
-		log.info("ooooo");
+//		ProjectDAO dao = new ProjectDAOImpl();
+//		Project p = new Project();
+//		
+//		p.setTitle("titre de projet");
+//		dao.add(p);
+//		
+//		log.info("ooooo");
 		
 	}
 	

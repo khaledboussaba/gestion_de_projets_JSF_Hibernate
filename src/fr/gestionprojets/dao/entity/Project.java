@@ -6,9 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Projet implements Serializable {
+@Table(name = "project")
+public class Project implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,7 +25,7 @@ public class Projet implements Serializable {
 	
 	private String active;
 	
-	public Projet() {
+	public Project() {
 	}
 
 	public Long getId() {

@@ -4,29 +4,29 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import fr.gestionprojets.dao.entity.Projet;
+import fr.gestionprojets.dao.entity.Project;
 import fr.gestionprojets.utils.HibernateUtil;
 
-public class ProjetDAOImpl implements ProjetDAO {
+public class ProjectDAOImpl implements ProjectDAO {
 
 	private Session session = HibernateUtil.openSession();
 	
 	@Override
-	public void add(Projet projet) {
+	public void add(Project projet) {
 		session.beginTransaction();
 		session.save(projet);
 		session.getTransaction().commit();
 	}
 	
 	@Override
-	public Projet findById(Long id) {
-		return (Projet) session.get(Projet.class, id);
+	public Project findById(Long id) {
+		return (Project) session.get(Project.class, id);
 	}
 
 	@Override
-	public Projet edit(Projet projet) {
+	public Project edit(Project projet) {
 		session.beginTransaction();
-		Projet p = (Projet) session.merge(projet);
+		Project p = (Project) session.merge(projet);
 		session.getTransaction().commit();
 		return p;
 	}
@@ -34,14 +34,14 @@ public class ProjetDAOImpl implements ProjetDAO {
 	@Override
 	public void delete(Long id) {
 		session.beginTransaction();
-		Projet p = findById(id);
+		Project p = findById(id);
 		session.delete(p);
 		session.getTransaction().commit();
 	}
 
 	@Override
-	public List<Projet> finAll() {
-		return session.createQuery("SELECT o FROM Projet o").list();
+	public List<Project> finAll() {
+		return session.createQuery("SELECT o FROM Project o").list();
 	}
 
 }
