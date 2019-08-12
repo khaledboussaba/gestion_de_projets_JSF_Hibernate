@@ -15,9 +15,16 @@ import javax.validation.constraints.Size;
 
 import org.apache.log4j.Logger;
 
+import fr.gestionprojets.dao.entity.Project;
+import fr.gestionprojets.service.ProjectService;
+import fr.gestionprojets.service.ProjectServiceImpl;
+
 @ManagedBean(name = "mbProject")
 @RequestScoped
 public class ProjectManagedBean {
+	
+	
+	private ProjectService projectService = new ProjectServiceImpl();
 
 	public Logger logger = Logger.getLogger(ProjectManagedBean.class);
 	private String title;
@@ -57,12 +64,23 @@ public class ProjectManagedBean {
 		if ("".equalsIgnoreCase(title)) {
 			FacesContext.getCurrentInstance().addMessage("title", new FacesMessage("Titre est obligatoire !"));//autre façàn de gérer les validation
 		}else {
+			// add to database
+			
 			logger.info("Les valeurs : ");
 			logger.info("   titre : " + title);
 			logger.info("   description : " + description);
 			logger.info("   budget : " + budget);
 			logger.info("   type : " + type);
-			logger.info("   active : " + active);			
+			logger.info("   active : " + active);
+						
+			Project p = new Project();
+			p.setTitle(title);
+			p.setDescription(description);
+			p.setBudget(Double.valueOf(budget));
+			p.setType(Long.valueOf(type));
+			p.setActive(active);
+			
+			projectService.add(p);
 		}
 
 	}

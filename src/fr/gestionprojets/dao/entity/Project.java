@@ -25,6 +25,8 @@ public class Project implements Serializable {
 	
 	private String active;
 	
+	private Long typeId;
+	
 	public Project() {
 	}
 
@@ -67,5 +69,13 @@ public class Project implements Serializable {
 	public void setActive(String active) {
 		this.active = active;
 	}
+
+	public Long getType() {
+		return typeId;
+	}
+
+	public void setType(Long type) {
+		this.typeId = type;
+	}	
 	
 }
