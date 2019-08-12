@@ -2,6 +2,7 @@ package fr.gestionprojets.dao.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class Project implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_project")
 	private Long id;
 	
 	private String title;
@@ -25,6 +27,7 @@ public class Project implements Serializable {
 	
 	private String active;
 	
+	@Column(name = "id_type")
 	private Long typeId;
 	
 	public Project() {

@@ -25,6 +25,8 @@ public class ProjectManagedBean {
 	
 	
 	private ProjectService projectService = new ProjectServiceImpl();
+	
+	private String success = "";
 
 	public Logger logger = Logger.getLogger(ProjectManagedBean.class);
 	private String title;
@@ -61,6 +63,7 @@ public class ProjectManagedBean {
 
 	public void addProject(ActionEvent event) {
 
+		success = "";
 		if ("".equalsIgnoreCase(title)) {
 			FacesContext.getCurrentInstance().addMessage("title", new FacesMessage("Titre est obligatoire !"));//autre façàn de gérer les validation
 		}else {
@@ -81,6 +84,14 @@ public class ProjectManagedBean {
 			p.setActive(active);
 			
 			projectService.add(p);
+			
+			success = "Les informations saisies ont été bien ajouter !";
+			
+			title = "";
+			description = "";
+			budget = "";
+			type = "";
+			active = "";
 		}
 
 	}
@@ -91,10 +102,6 @@ public class ProjectManagedBean {
 		desc += "Le montant : " + budget + "\n";
 		desc += "Active : " + ("Y".equals(active) ? "Oui": "Non");
 		description = desc;
-		title = "";
-		budget = "";
-		active = "";
-
 	}
 
 	public void saveData(ActionEvent event) {
@@ -141,6 +148,14 @@ public class ProjectManagedBean {
 	}
 	public void setActive(String active) {
 		this.active = active;
+	}
+
+	public String getSuccess() {
+		return success;
+	}
+
+	public void setSuccess(String success) {
+		this.success = success;
 	}
 
 }
