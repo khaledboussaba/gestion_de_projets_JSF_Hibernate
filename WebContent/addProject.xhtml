@@ -8,14 +8,16 @@
 </h:head>
 <h:body>
 	
-	<h:form>
+	<h:form id="form_add_project">
 	
 		<h3>Ajouter un nouveau projet</h3>
+		
+		<h:messages style="color: red; padding: 20px;"></h:messages> <!-- Messages de validations -->
 		
 		<table>
 			<tr>
 				<td><h:outputLabel value="Titre : " for="titre" /></td>
-				<td><h:inputText value="#{mbProject.title}" id="titre"/></td>
+				<td><h:inputText value="#{mbProject.title}" id="titre" /></td>
 			</tr>
 			<tr>
 				<td><h:outputLabel value="Description : " for="desc"/></td>
@@ -23,7 +25,11 @@
 			</tr>
 			<tr>
 				<td><h:outputLabel value="Budget : " for="budget"/></td>
-				<td><h:inputText value="#{mbProject.budget}" id="budget"/></td>
+				<td>
+					<h:inputText value="#{mbProject.budget}" id="budget" required="true" requiredMessage="Budget est obligatoire !"/>
+					<br/>
+					<h:message for="budget"></h:message>
+				</td>
 			</tr>
 			<tr>
 				<td><h:outputLabel value="Type : " for="type"/></td>
@@ -45,6 +51,7 @@
 			<tr>
 				<td colspan="2">
 					<h:commandButton value="Save" actionListener="#{mbProject.addProject}"></h:commandButton>
+					<h:commandButton value="Generate Description" actionListener="#{mbProject.generateDesription}"></h:commandButton>
 				</td>
 			</tr>
 		</table>
