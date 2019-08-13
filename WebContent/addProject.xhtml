@@ -10,6 +10,29 @@
 <!--  required="true" requiredMessage="Budget est obligatoire !" -->
 <!--  required="true" requiredMessage="Type est obligatoire !" -->
 	<h:form id="form_add_project">	
+		<h3>La liste des projets</h3>
+		<h:dataTable value="#{mbProject.projectList}" var="p" border="1" style="width:70%;">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{p.id}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">TITRE</f:facet>
+				<h:outputText value="#{p.title}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">BUDGET</f:facet>
+				<h:outputText value="#{p.budget}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">TYPE</f:facet>
+				<h:outputText value="#{p.type.name}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">ACTIVE</f:facet>
+				<h:outputText value="#{p.active}"></h:outputText>
+			</h:column>
+		</h:dataTable>
 		<h3>Ajouter un nouveau projet</h3>
 		<h:messages style="color: red; padding: 20px;"></h:messages> <!-- Messages de validations -->
 		

@@ -30,8 +30,7 @@ public class ProjectManagedBean {
 	private ProjectService projectService = new ProjectServiceImpl();
 	private TypeService typeService = new TypeServiceImpl();
 	
-	private String success = "";
-	private boolean showForm;
+	
 
 	public Logger logger = Logger.getLogger(ProjectManagedBean.class);
 	private String title;
@@ -41,8 +40,13 @@ public class ProjectManagedBean {
 	private String type;
 	@NotNull(message = "Projet actif ? (Oui / Non)") //autre façon de gérer les validations
 	private String active;
+	
+	private String success = "";
+	private boolean showForm;
 
 	private List<SelectItem> typeList;
+	
+	private List<Project> projectList;
 
 	static {
 		System.out.println("block static !");
@@ -59,6 +63,9 @@ public class ProjectManagedBean {
 	@PostConstruct
 	public void init() {
 		System.out.println("Post Construct !");
+		showForm = false;
+		
+		// ##########  Préparer typeList  ########## 
 		typeList = new ArrayList<SelectItem>();
 		typeList.add(new SelectItem("", ""));
 //		typeList.add(new SelectItem(1, "Informatique"));
@@ -70,7 +77,9 @@ public class ProjectManagedBean {
 			typeList.add(new SelectItem(t.getId(), t.getName()));
 		}
 		
-		showForm = false;
+		// ##########  Préparer projectList  ##########
+		projectList = projectService.finAll();
+		
 	}
 
 	public void addProject(ActionEvent event) {
@@ -92,7 +101,7 @@ public class ProjectManagedBean {
 			p.setTitle(title);
 			p.setDescription(description);
 			p.setBudget(Double.valueOf(budget));
-			p.setType(Long.valueOf(type));
+			p.setTypeId(Long.valueOf(type));
 			p.setActive(active);
 			
 			projectService.add(p);
@@ -186,6 +195,14 @@ public class ProjectManagedBean {
 
 	public void setShowForm(boolean showForm) {
 		this.showForm = showForm;
+	}
+
+	public List<Project> getProjectList() {
+		return projectList;
+	}
+
+	public void setProjectList(List<Project> projectList) {
+		this.projectList = projectList;
 	}
 
 }

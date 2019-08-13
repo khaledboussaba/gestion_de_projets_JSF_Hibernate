@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +31,10 @@ public class Project implements Serializable {
 	
 	@Column(name = "id_type")
 	private Long typeId;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_type", referencedColumnName = "id", insertable = false, updatable = false)
+	private Type type;
 	
 	public Project() {
 	}
@@ -73,12 +79,21 @@ public class Project implements Serializable {
 		this.active = active;
 	}
 
-	public Long getType() {
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public Long getTypeId() {
 		return typeId;
 	}
 
-	public void setType(Long type) {
-		this.typeId = type;
-	}	
+	public void setTypeId(Long typeId) {
+		this.typeId = typeId;
+	}
+
 	
 }
