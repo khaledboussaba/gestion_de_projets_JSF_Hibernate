@@ -31,6 +31,7 @@ public class ProjectManagedBean {
 	private TypeService typeService = new TypeServiceImpl();
 	
 	private String success = "";
+	private boolean showForm;
 
 	public Logger logger = Logger.getLogger(ProjectManagedBean.class);
 	private String title;
@@ -68,6 +69,8 @@ public class ProjectManagedBean {
 		for (Type t : listeService) {
 			typeList.add(new SelectItem(t.getId(), t.getName()));
 		}
+		
+		showForm = false;
 	}
 
 	public void addProject(ActionEvent event) {
@@ -111,6 +114,16 @@ public class ProjectManagedBean {
 		desc += "Le montant : " + budget + "\n";
 		desc += "Active : " + ("Y".equals(active) ? "Oui": "Non");
 		description = desc;
+	}
+	
+	public void showFormAction(ActionEvent event) {
+		logger.info("true");
+		showForm = true;
+	}
+	
+	public void cancelFormAction(ActionEvent event) {
+		logger.info("false");
+		showForm = false;
 	}
 
 	public void saveData(ActionEvent event) {
@@ -165,6 +178,14 @@ public class ProjectManagedBean {
 
 	public void setSuccess(String success) {
 		this.success = success;
+	}
+
+	public boolean isShowForm() {
+		return showForm;
+	}
+
+	public void setShowForm(boolean showForm) {
+		this.showForm = showForm;
 	}
 
 }

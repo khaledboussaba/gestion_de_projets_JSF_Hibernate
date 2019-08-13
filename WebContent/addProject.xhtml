@@ -7,56 +7,61 @@
 <title>Ajouter un nouveau projet || Gestion de projet</title>
 </h:head>
 <h:body>
-	
-	<h:form id="form_add_project">
-	
+<!--  required="true" requiredMessage="Budget est obligatoire !" -->
+<!--  required="true" requiredMessage="Type est obligatoire !" -->
+	<h:form id="form_add_project">	
 		<h3>Ajouter un nouveau projet</h3>
-		
 		<h:messages style="color: red; padding: 20px;"></h:messages> <!-- Messages de validations -->
 		
-		<h:outputText value="#{mbProject.success}" style="color: green; font-weight: bold"></h:outputText>
+		<h:commandButton value="Show form" actionListener="#{mbProject.showFormAction}"></h:commandButton>
 		
-		<table>
-			<tr>
-				<td><h:outputLabel value="Titre : " for="titre" /></td>
-				<td><h:inputText value="#{mbProject.title}" id="titre" /></td>
-			</tr>
-			<tr>
-				<td><h:outputLabel value="Description : " for="desc"/></td>
-				<td><h:inputTextarea rows="8" cols="50" value="#{mbProject.description}" id="desc"></h:inputTextarea></td>
-			</tr>
-			<tr>
-				<td><h:outputLabel value="Budget : " for="budget"/></td>
-				<td>
-					<h:inputText value="#{mbProject.budget}" id="budget" required="true" requiredMessage="Budget est obligatoire !"/>
-					<br/>
-					<h:message for="budget"></h:message>
-				</td>
-			</tr>
-			<tr>
-				<td><h:outputLabel value="Type : " for="type"/></td>
-				<td>
-					<h:selectOneMenu id="type" value="#{mbProject.type}" required="true" requiredMessage="Type est obligatoire !">
-						<f:selectItems value="#{mbProject.typeList}"></f:selectItems>
-					</h:selectOneMenu>
-				</td>
-			</tr>
-			<tr>
-				<td><h:outputLabel value="Active : " for="active"/></td>
-				<td>
-					<h:selectOneRadio value="#{mbProject.active}" id="active">
-						<f:selectItem itemValue="Y" itemLabel="Oui"></f:selectItem>
-						<f:selectItem itemValue="N" itemLabel="Non"></f:selectItem>
-					</h:selectOneRadio>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<h:commandButton value="Save" actionListener="#{mbProject.addProject}"></h:commandButton>
-					<h:commandButton value="Generate Description" actionListener="#{mbProject.generateDesription}"></h:commandButton>
-				</td>
-			</tr>
-		</table>
+		<h:panelGroup id="addProjectPanel" rendered="#{mbProject.showForm}">
+		
+			<h:outputText value="#{mbProject.success}" style="color: green; font-weight: bold"></h:outputText>	
+			<table>
+				<tr>
+					<td><h:outputLabel value="Titre : " for="titre" /></td>
+					<td><h:inputText value="#{mbProject.title}" id="titre" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel value="Description : " for="desc"/></td>
+					<td><h:inputTextarea rows="8" cols="50" value="#{mbProject.description}" id="desc"></h:inputTextarea></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel value="Budget : " for="budget"/></td>
+					<td>
+						<h:inputText value="#{mbProject.budget}" id="budget"/>
+						<br/>
+						<h:message for="budget"></h:message>
+					</td>
+				</tr>
+				<tr>
+					<td><h:outputLabel value="Type : " for="type"/></td>
+					<td>
+						<h:selectOneMenu id="type" value="#{mbProject.type}" >
+							<f:selectItems value="#{mbProject.typeList}"></f:selectItems>
+						</h:selectOneMenu>
+					</td>
+				</tr>
+				<tr>
+					<td><h:outputLabel value="Active : " for="active"/></td>
+					<td>
+						<h:selectOneRadio value="#{mbProject.active}" id="active">
+							<f:selectItem itemValue="Y" itemLabel="Oui"></f:selectItem>
+							<f:selectItem itemValue="N" itemLabel="Non"></f:selectItem>
+						</h:selectOneRadio>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<h:commandButton value="Save" actionListener="#{mbProject.addProject}"></h:commandButton>
+						<h:commandButton value="Generate Description" actionListener="#{mbProject.generateDesription}"></h:commandButton>
+						<h:commandButton value="Close form" actionListener="#{mbProject.cancelFormAction}"></h:commandButton>
+					</td>
+				</tr>
+			</table>
+		
+		</h:panelGroup>
 		
 	</h:form>
 	
