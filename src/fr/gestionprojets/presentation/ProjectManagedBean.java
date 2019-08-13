@@ -2,6 +2,7 @@ package fr.gestionprojets.presentation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -116,6 +117,23 @@ public class ProjectManagedBean {
 		}
 
 	}
+	
+	public void deleteProject(ActionEvent event) {
+		logger.info("delete project");
+		
+		//####  passage de parametres dans la requete  ###
+		FacesContext fc = FacesContext.getCurrentInstance();
+		
+		Map<String, String> param = fc.getExternalContext().getRequestParameterMap();
+		logger.info("id : " + param.get("id"));
+		//####    ###
+		
+		projectService.delete(new Long(param.get("id")));
+		
+		projectList = projectService.finAll();
+		
+	}
+	
 
 	public void generateDesription(ActionEvent event) {
 		String desc = "";
