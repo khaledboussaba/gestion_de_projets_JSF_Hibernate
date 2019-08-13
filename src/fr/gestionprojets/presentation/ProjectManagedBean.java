@@ -16,8 +16,11 @@ import javax.validation.constraints.Size;
 import org.apache.log4j.Logger;
 
 import fr.gestionprojets.dao.entity.Project;
+import fr.gestionprojets.dao.entity.Type;
 import fr.gestionprojets.service.ProjectService;
 import fr.gestionprojets.service.ProjectServiceImpl;
+import fr.gestionprojets.service.TypeService;
+import fr.gestionprojets.service.TypeServiceImpl;
 
 @ManagedBean(name = "mbProject")
 @RequestScoped
@@ -25,6 +28,7 @@ public class ProjectManagedBean {
 	
 	
 	private ProjectService projectService = new ProjectServiceImpl();
+	private TypeService typeService = new TypeServiceImpl();
 	
 	private String success = "";
 
@@ -56,9 +60,14 @@ public class ProjectManagedBean {
 		System.out.println("Post Construct !");
 		typeList = new ArrayList<SelectItem>();
 		typeList.add(new SelectItem("", ""));
-		typeList.add(new SelectItem(1, "Informatique"));
-		typeList.add(new SelectItem(2, "Commerce"));
-		typeList.add(new SelectItem(3, "Autre"));
+//		typeList.add(new SelectItem(1, "Informatique"));
+//		typeList.add(new SelectItem(2, "Commerce"));
+//		typeList.add(new SelectItem(3, "Autre"));
+		
+		List<Type> listeService = typeService.finAll();
+		for (Type t : listeService) {
+			typeList.add(new SelectItem(t.getId(), t.getName()));
+		}
 	}
 
 	public void addProject(ActionEvent event) {
