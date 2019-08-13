@@ -27,28 +27,27 @@ import fr.gestionprojets.service.TypeServiceImpl;
 @RequestScoped
 public class ProjectManagedBean {
 	
+	public Logger logger = Logger.getLogger(ProjectManagedBean.class);
 	
 	private ProjectService projectService = new ProjectServiceImpl();
-	private TypeService typeService = new TypeServiceImpl();
-	
-	
+	private TypeService typeService = new TypeServiceImpl();	
 
-	public Logger logger = Logger.getLogger(ProjectManagedBean.class);
 	private String title;
-	@Size(min = 2, max = 10, message = "Le nombre de caractère doit être compris entre 2 et 10 caractères")
 	private String description;
 	private String budget;
 	private String type;
-	@NotNull(message = "Projet actif ? (Oui / Non)") //autre façon de gérer les validations
 	private String active;
 	
-	private String success = "";
 	private boolean showForm;
+	private String success;
 
 	private List<SelectItem> typeList;
 	
 	private List<Project> projectList;
 
+	private String id;
+	private String operation;
+	
 	static {
 		System.out.println("block static !");
 	}
@@ -81,6 +80,41 @@ public class ProjectManagedBean {
 		// ##########  Préparer projectList  ##########
 		projectList = projectService.finAll();
 		
+		System.out.println("id :" + getParam("id"));
+		System.out.println("operation :" + getParam("operation"));
+		
+		if ("edit".equalsIgnoreCase(getParam("operation"))) {
+			setOperation(getParam("operation"));
+			Long id = null;
+			Project project = null;
+			try {
+				id = Long.valueOf(getParam("id"));
+				setId(getParam("id"));
+			} catch (Exception e) {
+				
+			}
+			if (id != null) {
+				project = projectService.findById(id);
+				if (project != null) {
+					title = project.getTitle();
+					description = project.getDescription();
+					if (project.getBudget() != null) {
+						budget = project.getBudget().toString();						
+					}
+					type = project.getTypeId() + "";
+					active = project.getActive();
+				}
+			}
+			
+			showForm = true;
+		}
+		
+	}
+	
+	public String getParam(String name) {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		return params.get(name);
 	}
 
 	public void addProject(ActionEvent event) {
@@ -97,8 +131,18 @@ public class ProjectManagedBean {
 			logger.info("   budget : " + budget);
 			logger.info("   type : " + type);
 			logger.info("   active : " + active);
-						
-			Project p = new Project();
+
+			Project p = null;
+
+			System.out.println("Add project : " + operation + " - " + id);
+			
+			if ("edit".equalsIgnoreCase(operation)) {
+				p = projectService.findById(new Long(id));
+				System.out.println("edit");
+			} else {
+				p = new Project();		
+				System.out.println("new");
+			}
 			p.setTitle(title);
 			p.setDescription(description);
 			p.setBudget(Double.valueOf(budget));
@@ -114,6 +158,8 @@ public class ProjectManagedBean {
 			budget = "";
 			type = "";
 			active = "";
+			id = "";
+			operation = "";
 		}
 
 	}
@@ -134,15 +180,6 @@ public class ProjectManagedBean {
 		
 	}
 	
-
-	public void generateDesription(ActionEvent event) {
-		String desc = "";
-		desc += "Le titre est : " + title + "\n";
-		desc += "Le montant : " + budget + "\n";
-		desc += "Active : " + ("Y".equals(active) ? "Oui": "Non");
-		description = desc;
-	}
-	
 	public void showFormAction(ActionEvent event) {
 		logger.info("true");
 		showForm = true;
@@ -151,6 +188,14 @@ public class ProjectManagedBean {
 	public void cancelFormAction(ActionEvent event) {
 		logger.info("false");
 		showForm = false;
+	}
+	
+	public void generateDesription(ActionEvent event) {
+		String desc = "";
+		desc += "Le titre est : " + title + "\n";
+		desc += "Le montant : " + budget + "\n";
+		desc += "Active : " + ("Y".equals(active) ? "Oui": "Non");
+		description = desc;
 	}
 
 	public void saveData(ActionEvent event) {
@@ -221,6 +266,22 @@ public class ProjectManagedBean {
 
 	public void setProjectList(List<Project> projectList) {
 		this.projectList = projectList;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getOperation() {
+		return operation;
+	}
+
+	public void setOperation(String operation) {
+		this.operation = operation;
 	}
 
 }
