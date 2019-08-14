@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://xmlns.jcp.org/jsf/html"
-	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Ajouter un nouveau projet || Gestion de projet</title>
@@ -20,103 +21,83 @@
 		<h:inputHidden value="#{mbProject.id}"></h:inputHidden>
 		<h:inputHidden value="#{mbProject.operation}"></h:inputHidden>
 	
-		<h3>La liste des projets</h3>
-		<h:dataTable value="#{mbProject.projectList}" var="p">
-			<h:column>
-				<f:facet name="header">CODE</f:facet>
-								
-				<h:link value="#{p.id}">
+		<h3>List of projects</h3>
+		
+		<p:dataTable var="p" value="#{mbProject.projectList}">
+		
+		    <p:column headerText="Code">
+		        <h:link value="#{p.id}">
 					<f:param name="id" value="#{p.id}"></f:param>
 					<f:param name="operation" value="edit"></f:param>
 				</h:link>
-				
-			</h:column>
-			<h:column>
-				<f:facet name="header">TITRE</f:facet>
-				<h:outputText value="#{p.title}"></h:outputText>
-			</h:column>
-			<h:column>
-				<f:facet name="header">BUDGET</f:facet>
-				<h:outputText value="#{p.budget}">
+		    </p:column>
+		 
+		    <p:column headerText="Titre">
+		        <h:outputText value="#{p.title}" />
+		    </p:column>
+		 
+		    <p:column headerText="Budget">
+		        <h:outputText value="#{p.budget}">
 					<f:convertNumber pattern="#0.000" />
 				</h:outputText>
-			</h:column>
-			<h:column>
-				<f:facet name="header">TYPE</f:facet>
-				<h:outputText value="#{p.type.name}"></h:outputText>
-			</h:column>
-			<h:column>
-				<f:facet name="header">ACTIVE</f:facet>
-				<h:panelGroup rendered="#{p.active eq 'Y'}">
+		    </p:column>
+		 
+		    <p:column headerText="Type">
+		        <h:outputText value="#{p.type.name}"></h:outputText>
+		    </p:column>
+		    
+		    <p:column headerText="Active">
+		        <h:panelGroup rendered="#{p.active eq 'Y'}">
 					<h:outputText value="Oui"></h:outputText>
 				</h:panelGroup>
 				<h:panelGroup rendered="#{!(p.active eq 'Y')}">
 					<h:outputText value="Non"></h:outputText>
 				</h:panelGroup>
-			</h:column>
-			<h:column>
-				<f:facet name="header">Supprimer</f:facet>
-				<h:commandLink onclick="return confirmer();" actionListener="#{mbProject.deleteProject}">
+		    </p:column>
+		    
+		    <p:column headerText="Suprimer">
+		        <h:commandLink onclick="return confirmer();" actionListener="#{mbProject.deleteProject}">
 					<h:graphicImage library="images" name="corbeille.png"></h:graphicImage>
 					<f:param name="id" value="#{p.id}"></f:param>
 				</h:commandLink>
-			</h:column>
-		</h:dataTable>
+		    </p:column>
+		    
+		</p:dataTable>
 		
 		<h3>Ajouter un nouveau projet</h3>
 		<h:messages style="color: red; padding: 20px;"></h:messages> <!-- Messages de validations -->
 		
 		<h:commandButton value="Show form" actionListener="#{mbProject.showFormAction}" />
 		
-		<h:panelGroup id="addProjectPanel" rendered="#{mbProject.showForm}">
+		<p:panelGrid columns="2" id="addProjectPanel" rendered="#{mbProject.showForm}">
 		
-			<h:outputText value="#{mbProject.success}" style="color: green; font-weight: bold"></h:outputText>	
-			<table>
-				<tr>
-					<td><h:outputLabel value="Titre : " for="titre" /></td>
-					<td><h:inputText value="#{mbProject.title}" id="titre" /></td>
-				</tr>
-				<tr>
-					<td><h:outputLabel value="Description : " for="desc"/></td>
-					<td><h:inputTextarea rows="8" cols="50" value="#{mbProject.description}" id="desc"></h:inputTextarea></td>
-				</tr>
-				<tr>
-					<td><h:outputLabel value="Budget : " for="budget"/></td>
-					<td>
-						<h:inputText value="#{mbProject.budget}" id="budget"/>
-						<br/>
-						<h:message for="budget"></h:message>
-					</td>
-				</tr>
-				<tr>
-					<td><h:outputLabel value="Type : " for="type"/></td>
-					<td>
-						<h:selectOneMenu id="type" value="#{mbProject.type}" >
-							<f:selectItems value="#{mbProject.typeList}"></f:selectItems>
-						</h:selectOneMenu>
-					</td>
-				</tr>
-				<tr>
-					<td><h:outputLabel value="Active : " for="active"/></td>
-					<td>
-						<h:selectOneRadio value="#{mbProject.active}" id="active">
-							<f:selectItem itemValue="Y" itemLabel="Oui"></f:selectItem>
-							<f:selectItem itemValue="N" itemLabel="Non"></f:selectItem>
-						</h:selectOneRadio>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<h:commandButton value="Save" actionListener="#{mbProject.addProject}" />
-						
-						<h:commandButton value="Generate Description" actionListener="#{mbProject.generateDesription}" />
-						
-						<h:commandButton value="Close form" actionListener="#{mbProject.cancelFormAction}" />
-					</td>
-				</tr>
-			</table>
-		
-		</h:panelGroup>
+			<h:outputLabel value="Titre : " for="titre" />
+			<h:inputText value="#{mbProject.title}" id="titre" />
+			
+			<h:outputLabel value="Description : " for="desc"/>
+			<h:inputTextarea rows="8" cols="50" value="#{mbProject.description}" id="desc"></h:inputTextarea>
+
+			<h:outputLabel value="Budget : " for="budget"/>
+			<h:inputText value="#{mbProject.budget}" id="budget" required="true" requiredMessage="Budget est obligatoire !">
+				<h:message for="budget"></h:message>
+			</h:inputText>
+
+			<h:outputLabel value="Type : " for="type"/>
+				<h:selectOneMenu id="type" value="#{mbProject.type}" >
+					<f:selectItems value="#{mbProject.typeList}"></f:selectItems>
+				</h:selectOneMenu>
+
+			<h:outputLabel value="Active : " for="active"/>
+				<h:selectOneRadio value="#{mbProject.active}" id="active">
+					<f:selectItem itemValue="Y" itemLabel="Oui"></f:selectItem>
+					<f:selectItem itemValue="N" itemLabel="Non"></f:selectItem>
+				</h:selectOneRadio>
+
+			<h:commandButton value="Generate Description" actionListener="#{mbProject.generateDesription}" />			
+			<h:commandButton value="Save" actionListener="#{mbProject.addProject}" />						
+			<h:commandButton value="Close form" actionListener="#{mbProject.cancelFormAction}" />
+			
+		</p:panelGrid>
 		
 	</h:form>
 	
