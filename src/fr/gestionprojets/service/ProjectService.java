@@ -2,7 +2,7 @@ package fr.gestionprojets.service;
 
 import java.util.List;
 
-import fr.gestionprojets.dao.entity.Project;
+import fr.gestionprojets.entity.Project;
 
 public interface ProjectService {
 	void add(Project projet);

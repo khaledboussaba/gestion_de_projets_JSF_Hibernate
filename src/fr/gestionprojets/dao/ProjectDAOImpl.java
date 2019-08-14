@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import fr.gestionprojets.dao.entity.Project;
+import fr.gestionprojets.entity.Project;
 import fr.gestionprojets.utils.HibernateUtil;
 
 public class ProjectDAOImpl implements ProjectDAO {

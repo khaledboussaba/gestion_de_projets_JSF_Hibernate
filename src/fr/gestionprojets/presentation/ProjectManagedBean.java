@@ -11,13 +11,11 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.apache.log4j.Logger;
 
-import fr.gestionprojets.dao.entity.Project;
-import fr.gestionprojets.dao.entity.Type;
+import fr.gestionprojets.entity.Project;
+import fr.gestionprojets.entity.Type;
 import fr.gestionprojets.service.ProjectService;
 import fr.gestionprojets.service.ProjectServiceImpl;
 import fr.gestionprojets.service.TypeService;
@@ -47,17 +45,8 @@ public class ProjectManagedBean {
 
 	private String id;
 	private String operation;
-	
-	static {
-		System.out.println("block static !");
-	}
-
-	{
-		System.out.println("block !");
-	}
 
 	public ProjectManagedBean() {
-		System.out.println("Constructeur !");
 	}
 
 	@PostConstruct
@@ -68,9 +57,6 @@ public class ProjectManagedBean {
 		// ##########  Préparer typeList  ########## 
 		typeList = new ArrayList<SelectItem>();
 		typeList.add(new SelectItem("", ""));
-//		typeList.add(new SelectItem(1, "Informatique"));
-//		typeList.add(new SelectItem(2, "Commerce"));
-//		typeList.add(new SelectItem(3, "Autre"));
 		
 		List<Type> listeService = typeService.finAll();
 		for (Type t : listeService) {
@@ -108,7 +94,6 @@ public class ProjectManagedBean {
 			
 			showForm = true;
 		}
-		
 	}
 	
 	public String getParam(String name) {

@@ -6,22 +6,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Ajouter un nouveau projet || Gestion de projet</title>
 	
-	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
-	
-	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-	
-	<script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
-	
 	<script>
-	
 		function confirmer(){
 			return confirm("Êtes vous sur de vouloir supprimer ce projet ?");
 		}
-		
-		$(document).ready( function () {
-		    $('.myTable').DataTable();
-		} );
-		
 	</script>
 </h:head>
 <h:body>
@@ -33,7 +21,7 @@
 		<h:inputHidden value="#{mbProject.operation}"></h:inputHidden>
 	
 		<h3>La liste des projets</h3>
-		<h:dataTable styleClass="myTable" value="#{mbProject.projectList}" var="p">
+		<h:dataTable value="#{mbProject.projectList}" var="p">
 			<h:column>
 				<f:facet name="header">CODE</f:facet>
 								
@@ -77,7 +65,7 @@
 		<h3>Ajouter un nouveau projet</h3>
 		<h:messages style="color: red; padding: 20px;"></h:messages> <!-- Messages de validations -->
 		
-		<h:commandButton value="Show form" actionListener="#{mbProject.showFormAction}"></h:commandButton>
+		<h:commandButton value="Show form" actionListener="#{mbProject.showFormAction}" />
 		
 		<h:panelGroup id="addProjectPanel" rendered="#{mbProject.showForm}">
 		
@@ -118,9 +106,11 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<h:commandButton value="Save" actionListener="#{mbProject.addProject}"></h:commandButton>
-						<h:commandButton value="Generate Description" actionListener="#{mbProject.generateDesription}"></h:commandButton>
-						<h:commandButton value="Close form" actionListener="#{mbProject.cancelFormAction}"></h:commandButton>
+						<h:commandButton value="Save" actionListener="#{mbProject.addProject}" />
+						
+						<h:commandButton value="Generate Description" actionListener="#{mbProject.generateDesription}" />
+						
+						<h:commandButton value="Close form" actionListener="#{mbProject.cancelFormAction}" />
 					</td>
 				</tr>
 			</table>

@@ -4,7 +4,7 @@ import java.util.List;
 
 import fr.gestionprojets.dao.TypeDAOImpl;
 import fr.gestionprojets.dao.TypeDao;
-import fr.gestionprojets.dao.entity.Type;
+import fr.gestionprojets.entity.Type;
 
 public class TypeServiceImpl implements TypeService {
 
