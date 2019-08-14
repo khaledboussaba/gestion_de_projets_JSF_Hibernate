@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
@@ -22,7 +22,7 @@ import fr.gestionprojets.service.TypeService;
 import fr.gestionprojets.service.TypeServiceImpl;
 
 @ManagedBean(name = "mbProject")
-@RequestScoped
+@ViewScoped
 public class ProjectManagedBean {
 	
 	public Logger logger = Logger.getLogger(ProjectManagedBean.class);
@@ -52,7 +52,7 @@ public class ProjectManagedBean {
 	@PostConstruct
 	public void init() {
 		System.out.println("Post Construct !");
-		showForm = false;
+		//showForm = false;
 		
 		// ##########  Préparer typeList  ########## 
 		typeList = new ArrayList<SelectItem>();
@@ -145,6 +145,8 @@ public class ProjectManagedBean {
 			active = "";
 			id = "";
 			operation = "";
+			
+			projectList = projectService.finAll();
 		}
 
 	}

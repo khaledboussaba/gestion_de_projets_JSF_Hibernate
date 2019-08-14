@@ -5,7 +5,7 @@ import org.hibernate.Session;
 
 import fr.gestionprojets.dao.ProjectDAO;
 import fr.gestionprojets.dao.ProjectDAOImpl;
-import fr.gestionprojets.dao.entity.Project;
+import fr.gestionprojets.entity.Project;
 
 public class Test {
 
