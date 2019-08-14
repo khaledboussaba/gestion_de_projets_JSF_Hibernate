@@ -23,8 +23,8 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		
 		<!-- Classes mapping -->
-		<mapping class="fr.gestionprojets.dao.entity.Project"/>
-		<mapping class="fr.gestionprojets.dao.entity.Type"/>
+		<mapping class="fr.gestionprojets.entity.Project"/>
+		<mapping class="fr.gestionprojets.entity.Type"/>
 		
 	</session-factory>
 </hibernate-configuration>

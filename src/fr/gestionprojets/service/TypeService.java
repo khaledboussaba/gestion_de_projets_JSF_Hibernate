@@ -2,7 +2,7 @@ package fr.gestionprojets.service;
 
 import java.util.List;
 
-import fr.gestionprojets.dao.entity.Type;
+import fr.gestionprojets.entity.Type;
 
 public interface TypeService {
 	void add(Type type);

@@ -1,4 +1,4 @@
-package fr.gestionprojets.dao.entity;
+package fr.gestionprojets.entity;
 
 import java.io.Serializable;
 

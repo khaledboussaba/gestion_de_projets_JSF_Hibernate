@@ -2,7 +2,7 @@ package fr.gestionprojets.dao;
 
 import java.util.List;
 
-import fr.gestionprojets.dao.entity.Type;
+import fr.gestionprojets.entity.Type;
 
 public interface TypeDao {
 	void add(Type type);

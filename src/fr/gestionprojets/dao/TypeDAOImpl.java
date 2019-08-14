@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import fr.gestionprojets.dao.entity.Type;
+import fr.gestionprojets.entity.Type;
 import fr.gestionprojets.utils.HibernateUtil;
 
 public class TypeDAOImpl implements TypeDao {
